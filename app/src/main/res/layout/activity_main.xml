@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.test.compass.ui.CompassViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <LinearLayout
+            android:id="@+id/layoutTurnRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_default"
+            android:layout_marginEnd="@dimen/padding_default"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgTurnRight"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tint="@color/colorPrimaryDark"
+                android:layout_gravity="center_horizontal"
+                android:rotation="90"
+                app:srcCompat="@drawable/ic_arrow_up" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtTurnRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/l_turn_right"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEnableLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/layoutTurnLeft"
+            app:layout_constraintEnd_toStartOf="@id/layoutTurnRight"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> viewModel.checkGpsStatus()}"
+            android:text="@string/l_enable_gps"
+            android:layout_marginTop="@dimen/padding_default"/>
+
+        <LinearLayout
+            android:id="@+id/layoutTurnLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_default"
+            android:layout_marginTop="@dimen/padding_default"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:rotation="270"
+                android:tint="@color/colorPrimaryDark"
+                app:srcCompat="@drawable/ic_arrow_up" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/l_turn_left"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgArrow"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="80dp"
+            android:maxWidth="80dp"
+            android:maxHeight="80dp"
+            android:tint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@id/viewDistance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutTurnLeft"
+            app:srcCompat="@drawable/ic_arrow_up" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/viewDistanceLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_default"
+            android:layout_marginEnd="@dimen/padding_default"
+            app:layout_constraintBottom_toTopOf="@id/layoutBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ProgressBar
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/l_getting_location"
+                android:layout_gravity="center"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <com.example.test.compass.ui.DistanceView
+            android:id="@+id/viewDistance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_default"
+            android:layout_marginEnd="@dimen/padding_default"
+            app:distance="@{viewModel.viewState.distance}"
+            app:layout_constraintBottom_toTopOf="@id/layoutBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layoutBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_default"
+            android:weightSum="3"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPickLocation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/l_pick_location" />
+
+            <com.example.test.compass.ui.LocationView
+                android:id="@+id/viewLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                app:locationViewEntity="@{viewModel.viewState.locationViewEntity}" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

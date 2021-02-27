@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Compass</string>
+    <string name="title_activity_destination_pick">Map</string>
+    <string name="l_destination_location">Destination location</string>
+    <string name="l_distance_km">KM: %1s</string>
+    <string name="l_turn_left">Turn left</string>
+    <string name="l_turn_right">Turn right</string>
+    <string name="l_current_location">Current location</string>
+    <string name="label_x">Long:</string>
+    <string name="label_y">Lat:</string>
+    <string name="l_getting_location">Getting current location..  Showing NORTH direction</string>
+    <string name="l_pick_location">PICK LOCATION</string>
+    <string name="l_enable_gps">Enable GPS</string>
+</resources>
